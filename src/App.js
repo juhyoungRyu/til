@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from "react";
-import Name from "./components/Name";
+import Matching from "./components/numberMatching/Matching";
 
 class App extends Component {
   render() {
-    let name = "주형";
     return (
       <Fragment>
-        <Name name={name} />
+        <Matching />
       </Fragment>
     );
   }
