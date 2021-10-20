@@ -1,39 +1,43 @@
-import React, { Component } from "react";
+import React, { Fragment, useState } from "react";
 
-let obj1 = [];
+export default function Matching() {
+  const [obj1, setObj1] = useState(["none"]);
+  const [obj2, setObj2] = useState(["none"]);
+  const [obj3, setObj3] = useState(["press the button"]);
+  let num1 = [];
+  let num2 = [];
 
-class Matching extends Component {
-  state = {
-    num1: [],
-    num2: 0,
-  };
-
-  randomNum = () => {
-    if (this.state.num1.length === 8) {
-      this.setState({
-        num1: [0],
-      });
+  const handleClick = () => {
+    for (let i = 1; i <= 8; i += 1) {
+      num1.push(Math.floor(Math.random() * 10) + 1);
     }
-    for (let i = 0; i <= 8; i++) {
-      obj1.push(Math.floor(Math.random() * 10));
+    setObj1(String(num1));
+
+    for (let j = 1; j <= 8; j += 1) {
+      num2.push(Math.floor(Math.random() * 10) + 1);
     }
+    setObj2(String(num2));
+
+    handleCheck();
   };
 
-  numInput = () => {
-    this.randomNum();
-    this.setState({
-      num1: obj1,
-    });
+  const handleCheck = () => {
+    let res = 0;
+    for (let k = 0; k < 8; k += 1) {
+      if (num1[k] === num2[k]) {
+        res += 1;
+        console.log(num1[k], num2[k]);
+      }
+    }
+    setObj3(res);
   };
 
-  render() {
-    return (
-      <div>
-        <p>{this.state.num1}</p>
-        <button onClick={this.numInput}>start</button>
-      </div>
-    );
-  }
+  return (
+    <Fragment>
+      <p>1 ➡️ {obj1}</p>
+      <p>2 ➡️ {obj2}</p>
+      <button onClick={handleClick}>start</button>
+      <p>결과 : {obj3}</p>
+    </Fragment>
+  );
 }
-
-export default Matching;
